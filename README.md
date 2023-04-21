@@ -2,7 +2,7 @@
 [![Actions Status](https://github.com/Olegovych/python-project-50/workflows/hexlet-check/badge.svg)](https://github.com/Olegovych/python-project-50/actions)
 [![hexlet-check](https://github.com/Olegovych/python-project-50/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/Olegovych/python-project-50/actions/workflows/hexlet-check.yml)
 ### Github Actions:
-https://github.com/Olegovych/python-project-50/actions/workflows/my-workflow.yml/badge.svg
+[![Tests and Linter](https://github.com/Olegovych/python-project-50/actions/workflows/my-workflow.yml/badge.svg)](https://github.com/Olegovych/python-project-50/actions/workflows/my-workflow.yml)
 ### Codeclimate:
 [![Maintainability](https://api.codeclimate.com/v1/badges/1652f401abd6a5d86523/maintainability)](https://codeclimate.com/github/Olegovych/python-project-50/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/1652f401abd6a5d86523/test_coverage)](https://codeclimate.com/github/Olegovych/python-project-50/test_coverage)
