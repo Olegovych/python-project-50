@@ -1,5 +1,9 @@
-import itertools
 from gendiff.file_parcer import file_parcer
+from gendiff.stylish import make_stylish
+
+FORMATTERS = {
+    'stylish': make_stylish
+}
 
 
 def make_line(prefix, key, value):
@@ -8,28 +12,27 @@ def make_line(prefix, key, value):
     return f'  {prefix} {key}: {value}'
 
 
-def generate_diff(file_path1, file_path2):
-    file_data1 = file_parcer(file_path1)
-    file_data2 = file_parcer(file_path2)
-    print(file_data1)
-    print(file_data2)
-    unique_keys = sorted(set(file_data1) | set(file_data2))
-    difference = []
+def make_diff(branch1, branch2):
+    unique_keys = sorted(branch1.keys() | branch2.keys())
+    diff = {}
     for key in unique_keys:
-        if key in file_data1:
-            val1 = file_data1[key]
-            if key in file_data2:
-                val2 = file_data2[key]
-                if val1 == val2:
-                    difference.append((' ', key, val1))
-                else:
-                    difference.append(('-', key, val1))
-                    difference.append(('+', key, val2))
-            else:
-                difference.append(('-', key, val1))
+        if key not in branch1:
+            diff[key] = {'added': branch2[key]}
+        elif key not in branch2:
+            diff[key] = {'deleted': branch1[key]}
+        elif branch1[key] == branch2[key]:
+            diff[key] = {'unchanged': branch1[key]}
+        elif isinstance(branch1[key], dict) and isinstance(branch2[key], dict):
+            diff[key] = {'nested': make_diff(branch1[key], branch2[key])}
         else:
-            val2 = file_data2[key]
-            difference.append(('+', key, val2))
-    lines = itertools.starmap(make_line, difference)
-    result = itertools.chain("{", lines, "}")
-    return '\n'.join(result)
+            diff[key] = {'changed_from': branch1[key],
+                         'changet_to': branch2[key]}
+    return diff
+
+
+def generate_diff(file_path1, file_path2, formatter='stylish'):
+    data1 = file_parcer(file_path1)
+    data2 = file_parcer(file_path2)
+    diff = make_diff(data1, data2)
+    format_diff = FORMATTERS.get(formatter, make_stylish)
+    return format_diff(diff)
