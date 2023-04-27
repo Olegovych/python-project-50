@@ -5,8 +5,8 @@ from gendiff.engine import generate_diff
 
 
 def main():
-    file_path1, file_path2 = get_args()
-    difference = generate_diff(file_path1, file_path2)
+    file_path1, file_path2, formatter = get_args()
+    difference = generate_diff(file_path1, file_path2, formatter)
     return difference
 
 
