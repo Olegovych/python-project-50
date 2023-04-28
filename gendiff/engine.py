@@ -1,15 +1,11 @@
 from gendiff.file_parcer import file_parcer
-from gendiff.stylish import make_stylish
+from gendiff.formatters.stylish import make_stylish
+from gendiff.formatters.plain import make_plain
 
 FORMATTERS = {
-    'stylish': make_stylish
+    'stylish': make_stylish,
+    'plain': make_plain
 }
-
-
-def make_line(prefix, key, value):
-    if isinstance(value, bool):
-        value = str(value).lower()
-    return f'  {prefix} {key}: {value}'
 
 
 def make_diff(branch1, branch2):
@@ -30,9 +26,9 @@ def make_diff(branch1, branch2):
     return diff
 
 
-def generate_diff(file_path1, file_path2, formatter='stylish'):
+def generate_diff(file_path1, file_path2, format_name='stylish'):
     data1 = file_parcer(file_path1)
     data2 = file_parcer(file_path2)
     diff = make_diff(data1, data2)
-    format_diff = FORMATTERS.get(formatter, make_stylish)
+    format_diff = FORMATTERS.get(format_name, make_stylish)
     return format_diff(diff)
