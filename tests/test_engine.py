@@ -39,3 +39,15 @@ def test_generate_diff_plain(file_path1, file_path2):
     with open('tests/fixtures/plain_diff.txt') as diff_file:
         expected = diff_file.read()
     assert difference == expected
+
+
+@pytest.mark.parametrize(
+    'file_path1,file_path2', [
+        ('tests/fixtures/nested1.json', 'tests/fixtures/nested2.json')
+    ]
+)
+def test_generate_diff_json(file_path1, file_path2):
+    difference = generate_diff(file_path1, file_path2, format_name='json')
+    with open('tests/fixtures/json_diff.json') as diff_file:
+        expected = diff_file.read()
+    assert difference == expected
