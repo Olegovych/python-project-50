@@ -15,10 +15,11 @@ SIGNS = {
 
 def format_to_str(value):
     if isinstance(value, bool):
-        value = str(value).lower()
+        return str(value).lower()
     elif value is None:
-        value = 'null'
-    return str(value)
+        return 'null'
+    else:
+        return str(value)
 
 
 def make_stylish(branch, depth=1, is_child=True):
