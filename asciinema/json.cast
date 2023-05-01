@@ -1,0 +1,12 @@
+{"version": 2, "width": 79, "height": 21, "timestamp": 1682930520, "idle_time_limit": 2.5, "env": {"SHELL": "/bin/bash", "TERM": "xterm-256color"}}
+[0.013866, "o", "\u001b[?2004h\u001b]0;lez@FAT_YOGA: ~/python-project-50/python-project-50\u0007\u001b[01;32mlez@FAT_YOGA\u001b[00m:\u001b[01;34m~/python-project-50/python-project-50\u001b[00m$ "]
+[4.071821, "o", "exit"]
+[4.485865, "o", "\b\b\b\bgendiff --format json tests/fixtures/nested1.json tests/fixtures/nested2.yaml"]
+[9.353654, "o", "\r\n\u001b[?2004l\r"]
+[9.389492, "o", "{\"common\": {\"nested\": {\"follow\": {\"added\": false}, \"setting1\": {\"unchanged\": \"Value 1\"}, \"setting2\": {\"deleted\": 200}, \"setting3\": {\"changed_from\": true, \"changet_to\": null}, \"setting4\": {\"added\": \"blah blah\"}, \"setting5\": {\"added\": {\"key5\": \"value5\"}}, \"setting6\": {\"nested\": {\"doge\": {\"nested\": {\"wow\": {\"changed_from\": \"\", \"changet_to\": \"so much\"}}}, \"key\": {\"unchanged\": \"value\"}, \"ops\": {\"added\": \"vops\"}}}}}, \"group1\": {\"nested\": {\"baz\": {\"changed_from\": \"bas\", \"changet_to\": \"bars\"}, \"foo\": {\"unchanged\": \"bar\"}, \"nest\": {\"changed_from\": {\"key\": \"value\"}, \"changet_to\": \"str\"}}}, \"group2\": {\"deleted\": {\"abc\": 12345, \"deep\": {\"id\": 45}}}, \"group3\": {\"added\": {\"deep\": {\"id\": {\"number\": 45}}, \"fee\": 100500}}}\r\n"]
+[9.393716, "o", "\u001b[?2004h\u001b]0;lez@FAT_YOGA: ~/python-project-50/python-project-50\u0007\u001b[01;32mlez@FAT_YOGA\u001b[00m:\u001b[01;34m~/python-project-50/python-project-50\u001b[00m$ "]
+[11.64096, "o", "e"]
+[12.239017, "o", "x"]
+[12.480308, "o", "i"]
+[12.883366, "o", "t"]
+[13.288197, "o", "\r\n\u001b[?2004l\rexit\r\n"]
