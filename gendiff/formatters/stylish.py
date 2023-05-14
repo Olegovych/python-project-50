@@ -9,7 +9,7 @@ SIGNS = {
     'unchanged': '  ',
     'nested': '  ',
     'changed_from': '- ',
-    'changet_to': '+ '
+    'changed_to': '+ '
 }
 
 
