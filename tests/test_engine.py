@@ -1,53 +1,27 @@
 import pytest
+import os.path
 from gendiff import generate_diff
 
 
-@pytest.mark.parametrize(
-    'file_path1,file_path2', [
-        ('tests/fixtures/file1.json', 'tests/fixtures/file2.json'),
-        ('tests/fixtures/file1.yml', 'tests/fixtures/file2.yaml')
-    ]
-)
-def test_generate_diff_flat(file_path1, file_path2):
-    difference = generate_diff(file_path1, file_path2)
-    with open('tests/fixtures/flat_diff.txt') as diff_file:
-        expected = diff_file.read()
-    assert difference == expected
+def get_path(file_name):
+    return os.path.join(os.path.dirname(__file__), 'fixtures', file_name)
 
 
 @pytest.mark.parametrize(
     'file_path1,file_path2', [
-        ('tests/fixtures/nested1.json', 'tests/fixtures/nested2.json'),
-        ('tests/fixtures/nested1.yml', 'tests/fixtures/nested2.yaml')
+        (get_path('nested1.json'), get_path('nested2.json')),
+        (get_path('nested1.yml'), get_path('nested2.yaml'))
     ]
 )
-def test_generate_diff_nested(file_path1, file_path2):
-    difference = generate_diff(file_path1, file_path2)
-    with open('tests/fixtures/nested_diff.txt') as diff_file:
-        expected = diff_file.read()
-    assert difference == expected
-
-
 @pytest.mark.parametrize(
-    'file_path1,file_path2', [
-        ('tests/fixtures/nested1.json', 'tests/fixtures/nested2.json'),
-        ('tests/fixtures/nested1.yml', 'tests/fixtures/nested2.yaml')
+    'diff_path,format_name', [
+        (get_path('nested_diff.txt'), 'stylish'),
+        (get_path('plain_diff.txt'), 'plain'),
+        (get_path('json_diff.json'), 'json')
     ]
 )
-def test_generate_diff_plain(file_path1, file_path2):
-    difference = generate_diff(file_path1, file_path2, format_name='plain')
-    with open('tests/fixtures/plain_diff.txt') as diff_file:
-        expected = diff_file.read()
-    assert difference == expected
-
-
-@pytest.mark.parametrize(
-    'file_path1,file_path2', [
-        ('tests/fixtures/nested1.json', 'tests/fixtures/nested2.json')
-    ]
-)
-def test_generate_diff_json(file_path1, file_path2):
-    difference = generate_diff(file_path1, file_path2, format_name='json')
-    with open('tests/fixtures/json_diff.json') as diff_file:
+def test_generate_diff(file_path1, file_path2, diff_path, format_name):
+    difference = generate_diff(file_path1, file_path2, format_name)
+    with open(diff_path) as diff_file:
         expected = diff_file.read()
     assert difference == expected
