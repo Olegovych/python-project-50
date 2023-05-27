@@ -11,6 +11,6 @@ def parse(data, format_name):
 
 def get_data(file_path):
     with open(file_path, 'r') as file:
-        str_data = file.read()
+        data = file.read()
     format_name = file_path.rpartition('.')[-1]
-    return parse(str_data, format_name)
+    return parse(data, format_name)
