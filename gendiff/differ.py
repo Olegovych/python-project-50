@@ -7,7 +7,7 @@ from gendiff.formatters.json import make_json
 
 def get_format(format_name):
     match format_name:
-        case 'stylish':
+        case 'stylish' | None:
             return make_stylish
         case 'plain':
             return make_plain
@@ -17,7 +17,7 @@ def get_format(format_name):
             raise ValueError('No such format name!')
 
 
-def generate_diff(file_path1, file_path2, format_name='stylish'):
+def generate_diff(file_path1, file_path2, format_name=None):
     data1 = get_data(file_path1)
     data2 = get_data(file_path2)
     diff = make_diff(data1, data2)
