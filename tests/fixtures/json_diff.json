@@ -1,80 +1,135 @@
 {
-  "common": {
-    "nested": {
-      "follow": {
-        "added": false
-      },
-      "setting1": {
-        "unchanged": "Value 1"
-      },
-      "setting2": {
-        "deleted": 200
-      },
-      "setting3": {
-        "changed_from": true,
-        "changed_to": null
-      },
-      "setting4": {
-        "added": "blah blah"
-      },
-      "setting5": {
-        "added": {
-          "key5": "value5"
-        }
-      },
-      "setting6": {
-        "nested": {
-          "doge": {
-            "nested": {
-              "wow": {
-                "changed_from": "",
-                "changed_to": "so much"
-              }
-            }
-          },
-          "key": {
-            "unchanged": "value"
-          },
-          "ops": {
-            "added": "vops"
-          }
-        }
-      }
-    }
-  },
-  "group1": {
-    "nested": {
-      "baz": {
-        "changed_from": "bas",
-        "changed_to": "bars"
-      },
-      "foo": {
-        "unchanged": "bar"
-      },
-      "nest": {
-        "changed_from": {
-          "key": "value"
+  "type": "differ",
+  "children": [
+    {
+      "type": "nested",
+      "key": "common",
+      "children": [
+        {
+          "type": "added",
+          "key": "follow",
+          "value": false
         },
-        "changed_to": "str"
-      }
-    }
-  },
-  "group2": {
-    "deleted": {
-      "abc": 12345,
-      "deep": {
-        "id": 45
-      }
-    }
-  },
-  "group3": {
-    "added": {
-      "deep": {
-        "id": {
-          "number": 45
+        {
+          "type": "unchanged",
+          "key": "setting1",
+          "value": "Value 1"
+        },
+        {
+          "type": "deleted",
+          "key": "setting2",
+          "value": 200
+        },
+        {
+          "type": "changed_from",
+          "key": "setting3",
+          "value": true
+        },
+        {
+          "type": "changed_to",
+          "key": "setting3",
+          "value": null
+        },
+        {
+          "type": "added",
+          "key": "setting4",
+          "value": "blah blah"
+        },
+        {
+          "type": "added",
+          "key": "setting5",
+          "value": {
+            "key5": "value5"
+          }
+        },
+        {
+          "type": "nested",
+          "key": "setting6",
+          "children": [
+            {
+              "type": "nested",
+              "key": "doge",
+              "children": [
+                {
+                  "type": "changed_from",
+                  "key": "wow",
+                  "value": ""
+                },
+                {
+                  "type": "changed_to",
+                  "key": "wow",
+                  "value": "so much"
+                }
+              ]
+            },
+            {
+              "type": "unchanged",
+              "key": "key",
+              "value": "value"
+            },
+            {
+              "type": "added",
+              "key": "ops",
+              "value": "vops"
+            }
+          ]
         }
-      },
-      "fee": 100500
+      ]
+    },
+    {
+      "type": "nested",
+      "key": "group1",
+      "children": [
+        {
+          "type": "changed_from",
+          "key": "baz",
+          "value": "bas"
+        },
+        {
+          "type": "changed_to",
+          "key": "baz",
+          "value": "bars"
+        },
+        {
+          "type": "unchanged",
+          "key": "foo",
+          "value": "bar"
+        },
+        {
+          "type": "changed_from",
+          "key": "nest",
+          "value": {
+            "key": "value"
+          }
+        },
+        {
+          "type": "changed_to",
+          "key": "nest",
+          "value": "str"
+        }
+      ]
+    },
+    {
+      "type": "deleted",
+      "key": "group2",
+      "value": {
+        "abc": 12345,
+        "deep": {
+          "id": 45
+        }
+      }
+    },
+    {
+      "type": "added",
+      "key": "group3",
+      "value": {
+        "deep": {
+          "id": {
+            "number": 45
+          }
+        },
+        "fee": 100500
+      }
     }
-  }
+  ]
 }

@@ -1,16 +1,44 @@
-def make_diff(branch1, branch2):
-    unique_keys = sorted(branch1.keys() | branch2.keys())
-    diff = {}
-    for key in unique_keys:
-        if key not in branch1:
-            diff[key] = {'added': branch2[key]}
-        elif key not in branch2:
-            diff[key] = {'deleted': branch1[key]}
-        elif branch1[key] == branch2[key]:
-            diff[key] = {'unchanged': branch1[key]}
-        elif isinstance(branch1[key], dict) and isinstance(branch2[key], dict):
-            diff[key] = {'nested': make_diff(branch1[key], branch2[key])}
+def make_children(data1, data2):
+    keys = sorted(data1.keys() | data2.keys())
+    children = []
+    for key in keys:
+        if key not in data1:
+            children.append({
+                'type': 'added',
+                'key': key,
+                'value': data2[key]
+            })
+        elif key not in data2:
+            children.append({
+                'type': 'deleted',
+                'key': key,
+                'value': data1[key]
+            })
+        elif data1[key] == data2[key]:
+            children.append({
+                'type': 'unchanged',
+                'key': key,
+                'value': data1[key]
+            })
+        elif isinstance(data1[key], dict) and isinstance(data2[key], dict):
+            children.append({
+                'type': 'nested',
+                'key': key,
+                'children': make_children(data1[key], data2[key])
+            })
         else:
-            diff[key] = {'changed_from': branch1[key],
-                         'changed_to': branch2[key]}
-    return diff
+            children.append({
+                'type': 'changed_from',
+                'key': key,
+                'value': data1[key]
+            })
+            children.append({
+                'type': 'changed_to',
+                'key': key,
+                'value': data2[key]
+            })
+    return children
+
+
+def make_diff(data1, data2):
+    return {'type': 'differ', 'children': make_children(data1, data2)}
