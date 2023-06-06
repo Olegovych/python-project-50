@@ -1,4 +1,4 @@
-from gendiff.formatters.stylish import format_to_js_style
+from gendiff.formatters.stylish import format_to_str
 
 
 def format_to_plain(value):
@@ -8,7 +8,7 @@ def format_to_plain(value):
         case str(val):
             return f"'{val}'"
         case _:
-            return format_to_js_style(value)
+            return format_to_str(value)
 
 
 def iter_children(children, path=''):
