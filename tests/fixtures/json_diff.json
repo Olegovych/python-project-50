@@ -21,14 +21,10 @@
           "value": 200
         },
         {
-          "type": "changed_from",
+          "type": "changed",
           "key": "setting3",
-          "value": true
-        },
-        {
-          "type": "changed_to",
-          "key": "setting3",
-          "value": null
+          "value_1": true,
+          "value_2": null
         },
         {
           "type": "added",
@@ -51,14 +47,10 @@
               "key": "doge",
               "children": [
                 {
-                  "type": "changed_from",
+                  "type": "changed",
                   "key": "wow",
-                  "value": ""
-                },
-                {
-                  "type": "changed_to",
-                  "key": "wow",
-                  "value": "so much"
+                  "value_1": "",
+                  "value_2": "so much"
                 }
               ]
             },
@@ -81,14 +73,10 @@
       "key": "group1",
       "children": [
         {
-          "type": "changed_from",
+          "type": "changed",
           "key": "baz",
-          "value": "bas"
-        },
-        {
-          "type": "changed_to",
-          "key": "baz",
-          "value": "bars"
+          "value_1": "bas",
+          "value_2": "bars"
         },
         {
           "type": "unchanged",
@@ -96,16 +84,12 @@
           "value": "bar"
         },
         {
-          "type": "changed_from",
+          "type": "changed",
           "key": "nest",
-          "value": {
+          "value_1": {
             "key": "value"
-          }
-        },
-        {
-          "type": "changed_to",
-          "key": "nest",
-          "value": "str"
+          },
+          "value_2": "str"
         }
       ]
     },

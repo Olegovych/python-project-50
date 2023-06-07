@@ -28,14 +28,10 @@ def make_children(data1, data2):
             })
         else:
             children.append({
-                'type': 'changed_from',
+                'type': 'changed',
                 'key': key,
-                'value': data1[key]
-            })
-            children.append({
-                'type': 'changed_to',
-                'key': key,
-                'value': data2[key]
+                'value_1': data1[key],
+                'value_2': data2[key]
             })
     return children
 
