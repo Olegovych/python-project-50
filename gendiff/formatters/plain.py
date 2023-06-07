@@ -11,34 +11,38 @@ def format_to_plain(value):
             return format_to_str(value)
 
 
-def iter_children(children, path=''):
-    lines = []
-    children_iterator = iter(children)
-    for child in children_iterator:
-        key = child['key']
-        property = f'{path}.{key}' if path else key
+def node_processing(tree, path=''):
+    key = tree.get("key")
+    property = f'{path}.{key}' if path else key
+    children = tree.get('children')
+    value = format_to_plain(tree.get('value'))
+    value_1 = format_to_plain(tree.get('value_1'))
+    value_2 = format_to_plain(tree.get('value_2'))
+    node_type = tree['type']
 
-        type_ = child['type']
-        if type_ == 'nested':
-            nested_lines = iter_children(child['children'], property)
-            lines.extend(nested_lines)
-            continue
+    if node_type == 'differ':
+        lines = (
+            recurse for child in children
+            if (recurse := node_processing(child))
+        )
+        return "\n".join(lines)
 
-        value = format_to_plain(child['value'])
-        if type_ == 'deleted':
-            action = "removed"
-        elif type_ == 'added':
-            action = f"added with value: {value}"
-        elif type_ == 'changed_from':
-            child = next(children_iterator)
-            new_value = format_to_plain(child['value'])
-            action = f"updated. From {value} to {new_value}"
-        else:
-            continue
+    if node_type == 'nested':
+        lines = (
+            recurse for child in children
+            if (recurse := node_processing(child, property))
+        )
+        return "\n".join(lines)
 
-        lines.append(f"Property '{property}' was {action}")
-    return lines
+    if node_type == 'deleted':
+        return f"Property '{property}' was removed"
+
+    if node_type == 'added':
+        return f"Property '{property}' was added with value: {value}"
+
+    if node_type == 'changed':
+        return f"Property '{property}' was updated. From {value_1} to {value_2}"
 
 
 def make_plain(diff):
-    return '\n'.join(iter_children(diff['children']))
+    return node_processing(diff)
